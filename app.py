@@ -1,9 +1,56 @@
 """미디어킷 페이지 — 왓챠 & 왓챠피디아 광고 상품 소개"""
 
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+
+
+def send_email_notification(form_data: dict) -> bool:
+    """문의 내용을 이메일로 발송합니다."""
+    try:
+        secrets = st.secrets["email"]
+        sender = secrets["sender"]
+        password = secrets["password"]
+        receiver = secrets["receiver"]
+
+        msg = MIMEMultipart()
+        msg["From"] = sender
+        msg["To"] = receiver
+        msg["Subject"] = f"[왓챠 광고 문의] {form_data['company']} - {form_data['name']}"
+
+        body = f"""새로운 광고 문의가 접수되었습니다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+회사명: {form_data['company']}
+담당자: {form_data['name']}
+이메일: {form_data['email']}
+연락처: {form_data.get('phone', '-')}
+광고 목적: {form_data.get('purpose', '-')}
+희망 집행 시기: {form_data.get('budget', '-')}
+관심 상품: {', '.join(form_data.get('interested', [])) or '-'}
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+문의 내용:
+{form_data.get('message', '-')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+왓챠 미디어킷에서 자동 발송된 메일입니다.
+"""
+        msg.attach(MIMEText(body, "plain", "utf-8"))
+
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender, password)
+            server.send_message(msg)
+        return True
+    except Exception as e:
+        st.error(f"메일 발송 중 오류: {e}")
+        return False
 
 st.set_page_config(page_title="미디어킷", page_icon="📖", layout="wide")
 
@@ -591,10 +638,27 @@ with tab_contact:
             if not company or not name or not email:
                 st.error("회사명, 담당자 이름, 이메일은 필수 항목입니다.")
             else:
-                st.success(
-                    f"문의가 접수되었습니다! {name}님, 1영업일 이내에 {email}로 연락드리겠습니다."
-                )
-                st.balloons()
+                form_data = {
+                    "company": company,
+                    "name": name,
+                    "email": email,
+                    "phone": phone,
+                    "purpose": purpose if purpose != "선택해주세요" else "",
+                    "budget": budget,
+                    "interested": interested,
+                    "message": message,
+                }
+                sent = send_email_notification(form_data)
+                if sent:
+                    st.success(
+                        f"문의가 접수되었습니다! {name}님, 1영업일 이내에 {email}로 연락드리겠습니다."
+                    )
+                    st.balloons()
+                else:
+                    st.warning(
+                        f"문의 내용은 접수되었으나 알림 메일 발송에 실패했습니다. "
+                        f"ad_sales@watcha.com으로 직접 연락 부탁드립니다."
+                    )
 
     st.markdown("---")
     st.markdown(
