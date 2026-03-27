@@ -152,6 +152,7 @@ with tab_watcha:
 
     # 스플래시
     st.markdown("#### 1. 스플래시 (앱 진입 전체화면)")
+    st.image("images/watcha_splash.png", use_container_width=True)
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown(
@@ -177,6 +178,7 @@ with tab_watcha:
 
     # 보드 배너
     st.markdown("#### 2. 보드 배너")
+    st.image("images/watcha_board.png", use_container_width=True)
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown(
@@ -203,6 +205,7 @@ with tab_watcha:
 
     # 전면 팝업
     st.markdown("#### 3. 전면 팝업 배너")
+    st.image("images/watcha_popup.png", use_container_width=True)
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown(
@@ -250,10 +253,10 @@ with tab_pedia:
             "location": "앱, 웹 진입 시 전면 팝업",
             "slots": "총 2구좌, 1주일 50% 랜덤 노출",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "약 60만",
             "ctr": "약 2.9%",
             "material": "이미지 소재, 외부 랜딩 가능",
+            "image": "images/pedia_popup.png",
         },
         {
             "name": "2. 빅배너",
@@ -261,10 +264,10 @@ with tab_pedia:
             "location": "메인 홈 화면 / 왓챠피디아 세상 페이지",
             "slots": "총 2구좌, 1주일 50% 랜덤 노출",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "약 150만",
             "ctr": "약 0.24%",
             "material": "이미지 및 동영상 소재 가능, 외부 랜딩 가능",
+            "image": "images/pedia_big.png",
         },
         {
             "name": "3. 롤링 배너",
@@ -272,10 +275,10 @@ with tab_pedia:
             "location": "메인 홈 화면 롤링 배너 1지면",
             "slots": "총 2구좌, 1주일 50% 랜덤 노출",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "약 70만",
             "ctr": "약 0.6%",
             "material": "이미지 소재, 외부 랜딩 가능",
+            "image": "images/pedia_rolling.png",
         },
         {
             "name": "4. 보드 배너",
@@ -283,10 +286,10 @@ with tab_pedia:
             "location": "홈 / 왓챠피디아 세상 / 검색 / 나의 왓챠 / 컬렉션 세상 등 6개 지면",
             "slots": "총 2구좌, 1주일 50% 랜덤 노출",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "약 500만",
             "ctr": "약 0.12%",
             "material": "이미지 소재, 외부 랜딩 가능",
+            "image": "images/pedia_board.png",
         },
         {
             "name": "5. 랭킹 HOT 배너",
@@ -294,10 +297,10 @@ with tab_pedia:
             "location": "왓챠피디아 HOT 랭킹 2순위 위치",
             "slots": "총 2구좌, 1주일 50% 랜덤 노출",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "약 45만",
             "ctr": "약 1%",
             "material": "영화/왓챠피디아 관련 콘텐츠만 가능, 이미지 소재, 외부 랜딩 가능",
+            "image": "images/pedia_ranking.png",
         },
         {
             "name": "6. 스플래시",
@@ -305,10 +308,10 @@ with tab_pedia:
             "location": "앱 진입 시 전체화면(풀) 또는 하단(파셜)",
             "slots": "총 1구좌, 1주일 단독 노출",
             "device": "APP (iOS, Android)",
-            "price": "",
             "impressions": "약 50만",
             "ctr": "-",
             "material": "이미지 소재만 가능",
+            "image": "images/pedia_splash.png",
         },
         {
             "name": "7. 유저 참여 이벤트",
@@ -316,10 +319,10 @@ with tab_pedia:
             "location": "검색 > 이벤트 탭 1주일 노출 + 전면 팝업 3일",
             "slots": "이벤트 전용 구좌",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "약 20만",
             "ctr": "약 5,000명 참여",
             "material": "추가 광고 집행 시 할인 적용",
+            "image": "images/pedia_event.png",
         },
         {
             "name": "8. 전용관 페이지",
@@ -327,15 +330,16 @@ with tab_pedia:
             "location": "홈 핫 아이템 클릭 시 전용관 페이지로 이동",
             "slots": "광고 구좌 / 핫 아이템 / 전용 페이지 / 미디어믹스",
             "device": "APP + WEB",
-            "price": "",
             "impressions": "-",
             "ctr": "-",
             "material": "영화/왓챠피디아 관련 콘텐츠 외 커스텀 드로어 집행 가능",
+            "image": "images/pedia_exclusive.png",
         },
     ]
 
     for product in products_pedia:
         st.markdown(f"#### {product['name']}")
+        st.image(product["image"], use_container_width=True)
         col1, col2 = st.columns([2, 1])
         with col1:
             st.markdown(
