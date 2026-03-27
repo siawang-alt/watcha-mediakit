@@ -152,7 +152,7 @@ with tab_watcha:
 
     # 스플래시
     st.markdown("#### 1. 스플래시 (앱 진입 전체화면)")
-    st.image("images/watcha_splash.png", use_container_width=True)
+    st.image("images/watcha_splash.png", width=400)
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown(
@@ -178,7 +178,7 @@ with tab_watcha:
 
     # 보드 배너
     st.markdown("#### 2. 보드 배너")
-    st.image("images/watcha_board.png", use_container_width=True)
+    st.image("images/watcha_board.png", width=400)
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown(
@@ -205,7 +205,7 @@ with tab_watcha:
 
     # 전면 팝업
     st.markdown("#### 3. 전면 팝업 배너")
-    st.image("images/watcha_popup.png", use_container_width=True)
+    st.image("images/watcha_popup.png", width=400)
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown(
@@ -339,7 +339,7 @@ with tab_pedia:
 
     for product in products_pedia:
         st.markdown(f"#### {product['name']}")
-        st.image(product["image"], use_container_width=True)
+        st.image(product["image"], width=400)
         col1, col2 = st.columns([2, 1])
         with col1:
             st.markdown(
